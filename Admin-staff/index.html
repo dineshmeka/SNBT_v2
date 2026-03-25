@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Staff | SNBT Degree College for Women</title>
+    <link rel="icon" type="image/x-icon" href="/assets/IMAGES/favicon.ico">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="/assets/JS/jquerry.js"></script>
+    <link rel="stylesheet" href="/assets/CSS/Nav.css">
+    <link rel="stylesheet" href="/assets/CSS/Footer.css">
+    <link rel="stylesheet" href="/assets/CSS/Responsive.css">
+    <style>
+        .staff-container {
+            max-width: 1100px;
+            margin: 80px auto;
+            padding: 20px;
+        }
+
+        .staff-header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .staff-header h1 {
+            color: #131d3b;
+            font-size: 2.5rem;
+            position: relative;
+            display: inline-block;
+            padding-bottom: 10px;
+        }
+
+        .staff-header h1::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 25%;
+            width: 50%;
+            height: 3px;
+            background: #ff4f01;
+        }
+
+        .staff-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 25px;
+        }
+
+        .staff-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        .staff-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .staff-img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            border-bottom: 4px solid #ff4f01;
+        }
+
+        .staff-info {
+            padding: 15px;
+        }
+
+        .staff-info h3 {
+            color: #131d3b;
+            margin: 10px 0 5px 0;
+            font-size: 1.2rem;
+        }
+
+        .staff-info p {
+            color: #666;
+            font-size: 0.9rem;
+            margin-bottom: 10px;
+        }
+
+        .designation {
+            font-weight: bold;
+            color: #ff4f01 !important;
+        }
+    </style>
+    <script>
+        $(function () {
+            $("#footer-placeholder").load("../Footer.html");
+        });
+    </script>
+</head>
+
+<body>
+    <div id="nav-placeholder"></div>
+
+    <div class="staff-container">
+        <div class="staff-header">
+            <h1>Administrative Staff</h1>
+            <p>Our dedicated team ensuring excellence in college administration</p>
+        </div>
+
+        <div class="staff-grid">
+            <div class="staff-card">
+                <img src="/assets/IMAGES/staff-nt-1.jpg" alt="Admin Staff 1" class="staff-img">
+                <div class="staff-info">
+                    <h3>Dhanalakshmi</h3>
+                    <p class="designation">Office Accountant</p>
+                </div>
+            </div>
+            <div class="staff-card">
+                <img src="/assets/IMAGES/staff-nt-2.jpg" alt="Admin Staff 2" class="staff-img">
+                <div class="staff-info">
+                    <h3>Jayalakshmi</h3>
+                    <p class="designation">Record Assistant</p>
+                </div>
+            </div>
+            <div class="staff-card">
+                <img src="/assets/IMAGES/staff-nt-3.jpg" alt="Admin Staff 3" class="staff-img">
+                <div class="staff-info">
+                    <h3>Sudha</h3>
+                    <p class="designation">School & College System Assistant</p>
+                </div>
+            </div>
+            <div class="staff-card">
+                <img src="/assets/IMAGES/staff-nt-4.jpg" alt="Admin Staff 4" class="staff-img">
+                <div class="staff-info">
+                    <h3>Feroz</h3>
+                    <p class="designation">Scholarship Monitoring Assistant</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer id="footer-placeholder"></footer>
+
+    <script src="/assets/JS/main.js"></script>
+</body>
+
+</html>

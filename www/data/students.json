@@ -1,0 +1,389 @@
+{
+  "students": {
+    "Y233073024": {
+      "name": "SAJJA PURNA CHANDRA NITHEESH",
+      "father": "S.V. RAM PRASAD",
+      "course": "B.SC",
+      "year": "3rd Year",
+      "objectCode": "OBJ2024-001",
+      "results": [
+        {
+          "code": "SDT3S-3L",
+          "marks": "38P"
+        },
+        {
+          "code": "MDY3S-1L",
+          "marks": "30P"
+        },
+        {
+          "code": "CSC3SLA",
+          "marks": "40P"
+        },
+        {
+          "code": "CSC3SLAI",
+          "marks": "30P"
+        },
+        {
+          "code": "CSC3SLB",
+          "marks": "50P"
+        },
+        {
+          "code": "CSC3SLBI",
+          "marks": "30P"
+        },
+        {
+          "code": "CSC3SLC",
+          "marks": "49P"
+        },
+        {
+          "code": "CSC3SLCI",
+          "marks": "30P"
+        },
+        {
+          "code": "CSC3SLD",
+          "marks": "36P"
+        },
+        {
+          "code": "CSC3SLDI",
+          "marks": "30P"
+        },
+        {
+          "code": "MAT3SLZ",
+          "marks": "30P"
+        },
+        {
+          "code": "MAT3SLZI",
+          "marks": "30P"
+        },
+        {
+          "code": "CSC3SLAP",
+          "marks": "50P"
+        },
+        {
+          "code": "CSC3SLBP",
+          "marks": "50P"
+        },
+        {
+          "code": "CSC3SLCP",
+          "marks": "50P"
+        },
+        {
+          "code": "CSC3SLDP",
+          "marks": "50P"
+        },
+        {
+          "code": "MAT3SLZP",
+          "marks": "48P"
+        }
+      ]
+    },
+    "Y233073025": {
+      "name": "YALAVARTHI KRISHNA CHAITANYA",
+      "father": "Y.SURIBABU",
+      "course": "B.SC",
+      "year": "2nd Year",
+      "objectCode": "OBJ2024-001",
+      "results": [
+        {
+          "code": "SDT3S-3L",
+          "marks": "38P"
+        },
+        {
+          "code": "MDY3S-1L",
+          "marks": "30P"
+        },
+        {
+          "code": "CSC3SLA",
+          "marks": "40P"
+        },
+        {
+          "code": "CSC3SLAI",
+          "marks": "30P"
+        },
+        {
+          "code": "CSC3SLB",
+          "marks": "50P"
+        },
+        {
+          "code": "CSC3SLBI",
+          "marks": "30P"
+        },
+        {
+          "code": "CSC3SLC",
+          "marks": "49P"
+        },
+        {
+          "code": "CSC3SLCI",
+          "marks": "30P"
+        },
+        {
+          "code": "CSC3SLD",
+          "marks": "36P"
+        },
+        {
+          "code": "CSC3SLDI",
+          "marks": "30P"
+        },
+        {
+          "code": "MAT3SLZ",
+          "marks": "30P"
+        },
+        {
+          "code": "MAT3SLZI",
+          "marks": "30P"
+        },
+        {
+          "code": "CSC3SLAP",
+          "marks": "50P"
+        },
+        {
+          "code": "CSC3SLBP",
+          "marks": "50P"
+        },
+        {
+          "code": "CSC3SLCP",
+          "marks": "50P"
+        },
+        {
+          "code": "CSC3SLDP",
+          "marks": "50P"
+        },
+        {
+          "code": "MAT3SLZP",
+          "marks": "48P"
+        }
+      ]
+    },
+    "Y233073026": {
+      "name": "SHAIK HEERA",
+      "father": "SHAIK VALI",
+      "course": "B.SC",
+      "year": "2nd Year",
+      "objectCode": "OBJ2024-001",
+      "results": [
+        {
+          "code": "SDT3S-3L",
+          "marks": "38P"
+        },
+        {
+          "code": "MDY3S-1L",
+          "marks": "30P"
+        },
+        {
+          "code": "CSC3SLA",
+          "marks": "40P"
+        },
+        {
+          "code": "CSC3SLAI",
+          "marks": "30P"
+        },
+        {
+          "code": "CSC3SLB",
+          "marks": "50P"
+        },
+        {
+          "code": "CSC3SLBI",
+          "marks": "30P"
+        },
+        {
+          "code": "CSC3SLC",
+          "marks": "49P"
+        },
+        {
+          "code": "CSC3SLCI",
+          "marks": "30P"
+        },
+        {
+          "code": "CSC3SLD",
+          "marks": "36P"
+        },
+        {
+          "code": "CSC3SLDI",
+          "marks": "30P"
+        },
+        {
+          "code": "MAT3SLZ",
+          "marks": "30P"
+        },
+        {
+          "code": "MAT3SLZI",
+          "marks": "30P"
+        },
+        {
+          "code": "CSC3SLAP",
+          "marks": "50P"
+        },
+        {
+          "code": "CSC3SLBP",
+          "marks": "50P"
+        },
+        {
+          "code": "CSC3SLCP",
+          "marks": "50P"
+        },
+        {
+          "code": "CSC3SLDP",
+          "marks": "50P"
+        },
+        {
+          "code": "MAT3SLZP",
+          "marks": "48P"
+        }
+      ]
+    },
+    "Y233073027": {
+      "name": "SINGAMANENI ANUSHA",
+      "father": "SINGAMANENI BABURAO",
+      "course": "B.SC",
+      "year": "1st Year",
+      "objectCode": "OBJ2024-001",
+      "results": [
+        {
+          "code": "SDT3S-3L",
+          "marks": "38P"
+        },
+        {
+          "code": "MDY3S-1L",
+          "marks": "30P"
+        },
+        {
+          "code": "CSC3SLA",
+          "marks": "40P"
+        },
+        {
+          "code": "CSC3SLAI",
+          "marks": "30P"
+        },
+        {
+          "code": "CSC3SLB",
+          "marks": "50P"
+        },
+        {
+          "code": "CSC3SLBI",
+          "marks": "30P"
+        },
+        {
+          "code": "CSC3SLC",
+          "marks": "49P"
+        },
+        {
+          "code": "CSC3SLCI",
+          "marks": "30P"
+        },
+        {
+          "code": "CSC3SLD",
+          "marks": "36P"
+        },
+        {
+          "code": "CSC3SLDI",
+          "marks": "30P"
+        },
+        {
+          "code": "MAT3SLZ",
+          "marks": "30P"
+        },
+        {
+          "code": "MAT3SLZI",
+          "marks": "30P"
+        },
+        {
+          "code": "CSC3SLAP",
+          "marks": "50P"
+        },
+        {
+          "code": "CSC3SLBP",
+          "marks": "50P"
+        },
+        {
+          "code": "CSC3SLCP",
+          "marks": "50P"
+        },
+        {
+          "code": "CSC3SLDP",
+          "marks": "50P"
+        },
+        {
+          "code": "MAT3SLZP",
+          "marks": "48P"
+        }
+      ]
+    },
+    "Y233073028": {
+      "name": "PAVULURI MOHAN VAMSI KRISHNA",
+      "father": "PAVULURI  SRINIVASARAO",
+      "course": "B.SC",
+      "year": "1st Year",
+      "objectCode": "OBJ2024-001",
+      "results": [
+        {
+          "code": "SDT3S-3L",
+          "marks": "40P"
+        },
+        {
+          "code": "MDY3S-1L",
+          "marks": "40P"
+        },
+        {
+          "code": "CSC3SLA",
+          "marks": "40P"
+        },
+        {
+          "code": "CSC3SLAI",
+          "marks": "30P"
+        },
+        {
+          "code": "CSC3SLB",
+          "marks": "50P"
+        },
+        {
+          "code": "CSC3SLBI",
+          "marks": "30P"
+        },
+        {
+          "code": "CSC3SLC",
+          "marks": "49P"
+        },
+        {
+          "code": "CSC3SLCI",
+          "marks": "30P"
+        },
+        {
+          "code": "CSC3SLD",
+          "marks": "36P"
+        },
+        {
+          "code": "CSC3SLDI",
+          "marks": "30P"
+        },
+        {
+          "code": "MAT3SLZ",
+          "marks": "30P"
+        },
+        {
+          "code": "MAT3SLZI",
+          "marks": "30P"
+        },
+        {
+          "code": "CSC3SLAP",
+          "marks": "50P"
+        },
+        {
+          "code": "CSC3SLBP",
+          "marks": "50P"
+        },
+        {
+          "code": "CSC3SLCP",
+          "marks": "50P"
+        },
+        {
+          "code": "CSC3SLDP",
+          "marks": "50P"
+        },
+        {
+          "code": "MAT3SLZP",
+          "marks": "48P"
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SNBT | Smt Nandamuri Basava Tarakuri Memorial Degree College for Women</title>
+    <link rel="icon" type="image/x-icon" href="IMAGES/favicon.ico">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!-- <script src="https://code.jquery.com/jquery-1.10.2.js"></script> -->
+    <script src="../assets/JS/jquerry.js"></script>
+    <link rel="stylesheet" href="../assets/CSS/Nav.css">
+    <link rel="stylesheet" href="../assets/CSS/Footer.css">
+    <link rel="stylesheet" href="../assets/CSS/Results.css">
+    <link rel="stylesheet" href="../assets/CSS/Responsive.css">
+    <script src="../assets/JS/captcha_rebuild.js"></script>
+    <script src="../assets/JS/main.js"></script>
+    <script>
+        $(function () {
+            $("#nav-placeholder").load("../Nav.html");
+            $("#footer-placeholder").load("../Footer.html");
+        });
+    </script>
+</head>
+
+<body>
+    <!--Navigation bar-->
+    <div id="nav-placeholder">
+
+    </div>
+
+    <!-- table begins from here -->
+    <div style="padding: 20px 40px 0 40px; font-size: 14px; font-family: sans-serif;">
+        <a href="../index.html" style="color: blue;">Home</a> » RESULTS
+    </div>
+
+    <div class="results-search-container">
+        <div class="results-card">
+            <div class="results-card-header">
+                <h3>CHECK STUDENT RESULTS</h3>
+            </div>
+            <form class="results-form">
+                <div class="form-row">
+                    <label>Hall Ticket Number:</label>
+                    <input id="hallticket-input" type="text" placeholder="Enter Hall Ticket Number..." required>
+                </div>
+
+                <div class="form-row captcha-row">
+                    <label>Enter Captcha:</label>
+                    <div class="captcha-box">
+                        <canvas id="captcha-canvas" width="200" height="60"
+                            style="border: 1px solid #ccc; background: white; border-radius: 5px; cursor: pointer;"></canvas>
+                        <span id="captcha-text" style="display:none">whhtc5</span>
+                        <div class="captcha-help">
+                            Can't read the image? click <a href="javascript:void(0)" onclick="refreshCaptcha()">here</a>
+                            to refresh.
+                        </div>
+                        <input id="captcha-input" type="text" placeholder="Enter letters here" required>
+                    </div>
+                </div>
+
+                <div class="form-actions">
+                    <button id="submitbtn" type="button" onclick="submitResultQuery()">Submit</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+
+    <div id="results-container">
+
+    </div>
+
+
+    <!--Footer section here-->
+    <footer id="footer-placeholder">
+
+    </footer>
+    <script src="../assets/JS/app.js"></script>
+</body>
+
+</html>

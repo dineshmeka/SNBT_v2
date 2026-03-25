@@ -1,0 +1,989 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Assessment & Marks | SNBT</title>
+    <link rel="icon" type="image/x-icon" href="../assets/IMAGES/favicon.ico">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="../assets/JS/jquerry.js"></script>
+    <link rel="stylesheet" href="../assets/CSS/Nav.css">
+    <link rel="stylesheet" href="../assets/CSS/Footer.css">
+    <link rel="stylesheet" href="../assets/CSS/Responsive.css">
+    <script src="../assets/JS/captcha_rebuild.js"></script>
+    <script>
+        $(function () {
+            $("#nav-placeholder").load("../Nav.html");
+            $("#footer-placeholder").load("../Footer.html");
+        });
+    </script>
+    <style>
+        :root {
+            --primary: #ff4f01;
+            --secondary: #131d3b;
+            --light-bg: #f4f7f6;
+            --glass: rgba(255, 255, 255, 0.9);
+        }
+
+        body {
+            background-color: #ebf3ff;
+            /* Matched to screenshot */
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        .assessment-container {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 20px;
+        }
+
+        .dashboard-header {
+            background: linear-gradient(135deg, var(--secondary) 0%, #1a2a5a 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 20px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(19, 29, 59, 0.3);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .search-section {
+            background: var(--glass);
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            margin-bottom: 30px;
+            display: flex;
+            gap: 15px;
+            align-items: center;
+            backdrop-filter: blur(10px);
+        }
+
+        .search-section input {
+            flex: 1;
+            padding: 12px 20px;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            font-size: 16px;
+            transition: all 0.3s;
+        }
+
+        .search-section input:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 10px rgba(255, 79, 1, 0.2);
+            outline: none;
+        }
+
+        .btn-action {
+            padding: 12px 25px;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-action:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255, 79, 1, 0.4);
+        }
+
+        /* Tabs Styling */
+        .tabs-container {
+            display: flex;
+            gap: 5px;
+            margin-bottom: -1px;
+            overflow-x: auto;
+            padding-bottom: 5px;
+        }
+
+        .tab {
+            padding: 12px 25px;
+            background: #e0e0e0;
+            cursor: pointer;
+            border-radius: 10px 10px 0 0;
+            font-weight: 600;
+            color: #666;
+            transition: all 0.3s;
+            white-space: nowrap;
+            border: 1px solid #ddd;
+            border-bottom: none;
+        }
+
+        .tab.active {
+            background: var(--secondary);
+            color: white;
+            border-color: var(--secondary);
+        }
+
+        .tab-content {
+            background: white;
+            border-radius: 0 15px 15px 15px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            min-height: 400px;
+            display: none;
+            animation: fadeIn 0.4s ease;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Table Styling */
+        .marks-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        .marks-table th {
+            background: #f8f9fa;
+            color: var(--secondary);
+            padding: 15px;
+            text-align: left;
+            border-bottom: 2px solid #eee;
+        }
+
+        .marks-table td {
+            padding: 15px;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .marks-input {
+            width: 70px;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            text-align: center;
+        }
+
+        .marks-input:focus {
+            border-color: var(--primary);
+            outline: none;
+        }
+
+        .subject-code {
+            font-weight: bold;
+            color: var(--primary);
+        }
+
+        .status-badge {
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        .status-pass {
+            background: #e8f5e9;
+            color: #2e7d32;
+        }
+
+        .status-fail {
+            background: #ffebee;
+            color: #c62828;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .edit-controls {
+            margin-top: 20px;
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+        }
+
+        .log-out {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .log-out:hover {
+            color: gold;
+        }
+
+        /* NEW: Results Report Styles */
+        .results-report-container {
+            border: 1px solid #ccc;
+            padding: 0;
+            background: #fff;
+            font-family: Arial, Helvetica, sans-serif;
+            color: #333;
+        }
+
+        .report-header-bar {
+            background-color: #d1e7ff;
+            height: 25px;
+            border-bottom: 1px solid #ccc;
+        }
+
+        .report-info-table,
+        .report-footer-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .report-info-table td,
+        .report-footer-table td {
+            border: 1px solid #ccc;
+            padding: 8px 12px;
+            font-size: 14px;
+        }
+
+        .report-label {
+            width: 35%;
+            font-weight: bold;
+            color: #111;
+        }
+
+        .report-marks-wrapper {
+            padding: 30px 0;
+            background: #ebf3ff;
+            display: flex;
+            justify-content: center;
+        }
+
+        .report-header-bar,
+        .report-footer-bar {
+            background-color: #d1e7ff;
+            height: 30px;
+            border: 1px solid #ccc;
+        }
+
+        .report-info-table,
+        .report-footer-table {
+            background: #fff;
+        }
+
+        .report-marks-table {
+            width: 70%;
+            border-collapse: collapse;
+            background: white;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+        }
+
+        .report-marks-table th,
+        .report-marks-table td {
+            border: 1px solid #ccc;
+            padding: 6px 12px;
+            text-align: center;
+            font-size: 14px;
+        }
+
+        .report-marks-table th {
+            background: white;
+            color: black;
+            font-weight: bold;
+        }
+
+        .breadcrumb {
+            margin-bottom: 15px;
+            font-size: 14px;
+            color: #666;
+        }
+
+        .breadcrumb a {
+            color: #0000ee;
+            text-decoration: underline;
+        }
+
+        /* Captcha Styling */
+        .captcha-container {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: #eef4fb;
+            padding: 10px;
+            border-radius: 8px;
+            border: 1px solid #d1d9e6;
+            margin-top: 10px;
+        }
+
+        .captcha-img {
+            background: white;
+            padding: 5px 15px;
+            font-size: 1.5rem;
+            font-style: italic;
+            font-weight: bold;
+            font-family: 'Courier New', Courier, monospace;
+            border: 1px dashed #666;
+            letter-spacing: 5px;
+            user-select: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="nav-placeholder"></div>
+
+    <div class="assessment-container">
+        <div id="assessment-portal-refit"
+            style="background: #ebf3ff; border: 1px solid #ccc; max-width: 800px; margin: 0 auto 30px auto; font-family: Arial, sans-serif; box-shadow: 0 4px 15px rgba(0,0,0,0.05); padding: 0;">
+            <div style="background-color: #d1e7ff; height: 35px; border-bottom: 1px solid #ccc;"></div>
+            <div style="padding: 40px;">
+                <table style="width: 100%; border-collapse: collapse;">
+                    <!-- Hall Ticket Row -->
+                    <tr>
+                        <td
+                            style="width: 38%; text-align: right; vertical-align: middle; padding-right: 20px; font-size: 1.8rem; color: #333; line-height: 1.3; font-weight: 500;">
+                            Hall Ticket <br> Number:
+                        </td>
+                        <td>
+                            <input type="text" id="hallticket-search" placeholder="Enter Hall Ticket Number..."
+                                style="padding: 5px 10px; font-size: 1.8rem; border: 1px solid #555; border-radius: 0; width: 350px; background: white; color: black;">
+                        </td>
+                    </tr>
+                    <!-- Captcha Image Row -->
+                    <tr>
+                        <td></td>
+                        <td style="padding: 30px 0 5px 0;">
+                            <div id="captcha-display-container" style="display: flex; align-items: center; gap: 15px;">
+                                <canvas id="captcha-canvas" width="220" height="70" 
+                                    style="border: 1px solid #ccc; background: white; border-radius: 8px; cursor: pointer;"></canvas>
+                                <div style="display: flex; flex-direction: column; gap: 5px;">
+                                    <span id="captcha-text" style="display:none">whhtc5</span>
+                                    <div style="font-size: 1.2rem; color: #666; font-style: italic;">
+                                        Characters are case-sensitive.
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    <!-- Refresh link Row -->
+                    <tr>
+                        <td></td>
+                        <td style="padding-bottom: 25px; font-size: 1.5rem; color: #555;">
+                            Can't read the image? click <a href="javascript:void(0)" onclick="refreshCaptcha()"
+                                style="color: #0088cc; text-decoration: none;">here</a> to refresh.
+                        </td>
+                    </tr>
+                    <!-- Enter Captcha Row -->
+                    <tr>
+                        <td
+                            style="text-align: right; vertical-align: middle; padding-right: 20px; font-size: 1.8rem; color: #333; line-height: 1.3; font-weight: 500;">
+                            Enter Captcha <br> :
+                        </td>
+                        <td style="vertical-align: middle;">
+                            <input type="text" id="captcha-input" placeholder="Type letters here..."
+                                style="padding: 12px 15px; font-size: 2rem; border: 1px solid #cbd5e0; border-radius: 8px; width: 350px; color: #333;">
+                        </td>
+                    </tr>
+                    <!-- Submit Row -->
+                    <tr>
+                        <td></td>
+                        <td style="padding-top: 30px;">
+                            <button onclick="searchStudent()"
+                                style="padding: 6px 30px; font-size: 1.8rem; background: #eee; border: 1px solid #777; border-radius: 4px; cursor: pointer; color: #111; font-family: inherit;">
+                                Submit
+                            </button>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+        <div id="no-record-msg" style="text-align: center; padding: 50px; color: #666;">
+            <i class="fa fa-folder-open-o fa-4x" style="opacity: 0.3; margin-bottom: 20px; display: block;"></i>
+            <h3>No student record selected</h3>
+            <p>Please enter a valid hall ticket number to view and manage assessment details.</p>
+        </div>
+
+        <div id="student-dashboard" class="hidden">
+            <!-- Student Mini Profile -->
+            <div id="student-mini-info"
+                style="background: white; padding: 20px; border-radius: 15px; margin-bottom: 20px; display: flex; gap: 40px; border-left: 5px solid var(--primary); box-shadow: 0 5px 15px rgba(0,0,0,0.05);">
+                <div>
+                    <small style="color: #888; text-transform: uppercase; font-weight: bold;">Student Name</small>
+                    <div id="disp-name" style="font-size: 1.2rem; font-weight: bold; color: var(--secondary);">---</div>
+                </div>
+                <div>
+                    <small style="color: #888; text-transform: uppercase; font-weight: bold;">Hall Ticket</small>
+                    <div id="disp-ht" style="font-size: 1.2rem; font-weight: bold; color: var(--secondary);">---</div>
+                </div>
+                <div>
+                    <small style="color: #888; text-transform: uppercase; font-weight: bold;">Course & Year</small>
+                    <div id="disp-course" style="font-size: 1.2rem; font-weight: bold; color: var(--secondary);">---
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tabs -->
+            <div class="tabs-container">
+                <div class="tab" onclick="openTab(event, 'profile-tab')">PROFILE</div>
+                <div class="tab" onclick="openTab(event, 'schedule-tab')">EXAM SCHEDULE</div>
+                <div class="tab" onclick="openTab(event, 'preview-tab')">REG. PREVIEW</div>
+                <div class="tab active" id="assessment-tab-btn" onclick="openTab(event, 'assessment-tab')">ASSESSMENT
+                </div>
+                <div class="tab" onclick="openTab(event, 'results-tab')">EXAM RESULTS</div>
+                <div class="tab" onclick="openTab(event, 'elective-tab')">ELECTIVE</div>
+                <div class="tab" onclick="openTab(event, 'grievance-tab')">GRIEVANCE</div>
+            </div>
+
+            <!-- Tab Contents -->
+            <div id="profile-tab" class="tab-content">
+                <div style="display: flex; gap: 30px; align-items: flex-start;">
+                    <div
+                        style="flex: 0 0 200px; text-align: center; background: #f8f9fa; padding: 20px; border-radius: 15px; border: 1px solid #eee;">
+                        <i class="fa fa-user-circle-o fa-5x" style="color: var(--secondary); margin-bottom: 15px;"></i>
+                        <div
+                            style="background: var(--primary); color: white; padding: 5px; border-radius: 5px; font-size: 0.8rem; font-weight: bold;">
+                            OFFICIAL PROFILE</div>
+                    </div>
+                    <div style="flex: 1;">
+                        <h3
+                            style="margin: 0 0 20px 0; color: var(--secondary); border-bottom: 2px solid var(--primary); display: inline-block; padding-bottom: 5px;">
+                            STUDENT BIODATA</h3>
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+                            <div class="info-row"><strong>Full Name:</strong> <span id="prof-name-full">---</span></div>
+                            <div class="info-row"><strong>Father's Name:</strong> <span id="prof-father">---</span>
+                            </div>
+                            <div class="info-row"><strong>Admission No:</strong> <span
+                                    id="prof-adm">SNBT/2023/452</span></div>
+                            <div class="info-row"><strong>Date of Birth:</strong> 12-05-2005</div>
+                            <div class="info-row"><strong>Department:</strong> COMPUTER SCIENCE</div>
+                            <div class="info-row"><strong>Academic Year:</strong> 2023-2026</div>
+                            <div class="info-row"><strong>Phone:</strong> +91 98XXX XXXXX</div>
+                            <div class="info-row"><strong>Status:</strong> <span
+                                    style="color: green; font-weight: bold;">REGULAR (ACTIVE)</span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="schedule-tab" class="tab-content">
+                <h3 style="color: var(--secondary); margin-bottom: 25px;"><i class="fa fa-calendar"></i> UNIVERSITY EXAM
+                    SCHEDULE - JUNE 2026</h3>
+                <table class="marks-table">
+                    <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Session</th>
+                            <th>Subject Code</th>
+                            <th>Subject Name</th>
+                            <th>Room No</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>15-06-2026</td>
+                            <td>FN (9:00 AM)</td>
+                            <td class="subject-code">CS6303</td>
+                            <td>Data Structures</td>
+                            <td>LAB-1</td>
+                        </tr>
+                        <tr>
+                            <td>17-06-2026</td>
+                            <td>FN (9:00 AM)</td>
+                            <td class="subject-code">CS6551</td>
+                            <td>Operating Systems</td>
+                            <td>R-204</td>
+                        </tr>
+                        <tr>
+                            <td>19-06-2026</td>
+                            <td>FN (9:00 AM)</td>
+                            <td class="subject-code">EC6001</td>
+                            <td>Microprocessors</td>
+                            <td>R-204</td>
+                        </tr>
+                        <tr>
+                            <td>21-06-2026</td>
+                            <td>FN (9:00 AM)</td>
+                            <td class="subject-code">EC6601</td>
+                            <td>VLSI Design</td>
+                            <td>R-102</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div id="preview-tab" class="tab-content">
+                <div
+                    style="background: #fff; border: 2px dashed #ddd; padding: 40px; border-radius: 15px; position: relative;">
+                    <div
+                        style="position: absolute; top: 20px; right: 20px; font-size: 2rem; color: #eee; transform: rotate(-15deg); font-weight: bold; border: 5px solid #eee; padding: 10px; border-radius: 10px;">
+                        PREVIEW ONLY</div>
+                    <div style="text-align: center; margin-bottom: 30px;">
+                        <img src="../assets/IMAGES/Snbt logo.png" style="height: 60px; margin-bottom: 10px;">
+                        <h2 style="margin: 0; color: var(--secondary);">EXAMINATION REGISTRATION FORM</h2>
+                        <p style="margin: 5px 0;">VI Semester Regular Examinations - July 2026</p>
+                    </div>
+                    <table style="width: 100%; border-collapse: collapse;">
+                        <tr>
+                            <td style="padding: 10px; border: 1px solid #eee;"><strong>Institution:</strong> SNBT DEGREE
+                                COLLEGE</td>
+                            <td style="padding: 10px; border: 1px solid #eee;"><strong>HT No:</strong> <span
+                                    id="prev-ht">---</span></td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 10px; border: 1px solid #eee;"><strong>Candidate:</strong> <span
+                                    id="prev-name">---</span></td>
+                            <td style="padding: 10px; border: 1px solid #eee;"><strong>Course:</strong> <span
+                                    id="prev-course">---</span></td>
+                        </tr>
+                    </table>
+                    <div style="margin-top: 20px;">
+                        <p><strong>Registered Subjects:</strong></p>
+                        <ul style="column-count: 2; line-height: 2;">
+                            <li>CS6303 - Data Structures</li>
+                            <li>CS6551 - Operating Systems</li>
+                            <li>EC6001 - Microprocessors</li>
+                            <li>EC6601 - VLSI Design</li>
+                            <li>EC6602 - Antenna Theory</li>
+                            <li>SK6001 - Soft Skills (Elective)</li>
+                        </ul>
+                    </div>
+                    <div id="download-status"
+                        style="display:none; margin-top: 15px; background: #e8f5e9; color: #2e7d32; padding: 10px; border-radius: 8px; text-align: center; border: 1px solid #c8e6c9;">
+                        <i class="fa fa-check-circle"></i> <span id="status-text">File Downloaded Successfully!</span>
+                    </div>
+                    <div style="margin-top: 30px; text-align: right;">
+                        <button class="btn-action" onclick="simulateDownload('Registration_Form', 'prev')"><i
+                                class="fa fa-file-pdf-o"></i> GENERATE & DOWNLOAD REGISTRATION PDF</button>
+                    </div>
+                </div>
+            </div>
+
+            <div id="assessment-tab" class="tab-content active">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                    <h3 style="margin: 0;"><i class="fa fa-check-square-o"></i> Internal & External Assessment Marks
+                    </h3>
+                    <div
+                        style="background: #fdf2e9; padding: 10px 15px; border-radius: 8px; border: 1px solid #fad7a0; font-size: 14px; color: #a04000;">
+                        <i class="fa fa-info-circle"></i> Marks are stored locally for demonstration.
+                    </div>
+                </div>
+
+                <div style="overflow-x: auto;">
+                    <table class="marks-table" id="assessment-table">
+                        <thead>
+                            <tr>
+                                <th>Subject Code</th>
+                                <th>Subject Name</th>
+                                <th>Group/Year</th>
+                                <th>Internal Max</th>
+                                <th>Internal Marks</th>
+                                <th>External Max</th>
+                                <th>External Marks</th>
+                                <th>Total</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody id="marks-body">
+                            <!-- Rows will be injected by JS -->
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="edit-controls">
+                    <button class="btn-action" style="background: #6c757d;" onclick="resetMarks()"><i
+                            class="fa fa-undo"></i> RESET ALL</button>
+                    <button class="btn-action" onclick="saveMarks()"><i class="fa fa-save"></i> SAVE & REPLACE
+                        CHANGES</button>
+                </div>
+
+                <div
+                    style="margin-top: 30px; background: #e8ebf3; padding: 25px; border-radius: 12px; font-size: 0.95rem; border: 1px solid #d1d9e6;">
+                    <strong
+                        style="color: var(--secondary); font-size: 1.1rem; display: block; margin-bottom: 15px;">Note:</strong>
+                    <ol style="margin: 0; padding-left: 20px; line-height: 1.8; color: #444;">
+                        <li>The attendance details (if visible) are given only in terms of periods. If the details are
+                            in some other format like % of attendance, you may approach the concerned faculty member.
+                        </li>
+                        <li>The internal assessment marks are displayed for the selected maximum (25 or 30) marks per
+                            subject.</li>
+                        <li>External marks are recorded out of a maximum of 50.</li>
+                        <li>If any discrepancy is noticed by a student, it may be clarified with the concerned faculty
+                            members or the controller of examinations.</li>
+                    </ol>
+                </div>
+            </div>
+
+            <div id="results-tab" class="tab-content">
+                <div class="breadcrumb" style="margin-bottom: 5px;">
+                    <a href="../index.html" style="color: blue; text-decoration: none;">Home</a> » RESULTS
+                </div>
+                <div style="font-size: 11px; color: #333; margin-bottom: 10px;">Page 1</div>
+
+                <div id="report-output">
+                    <!-- The formal results report will be injected here -->
+                    <div
+                        style="text-align: center; padding: 40px; background: #f8f9fa; border-radius: 10px; border: 2px dashed #ccc;">
+                        <i class="fa fa-file-text-o fa-3x" style="color: #bbb; margin-bottom: 15px;"></i>
+                        <p style="color: #888;">Search for a student and click <strong>GENERATE MARKSHEET</strong> below
+                            to view the official result record.</p>
+                    </div>
+                </div>
+
+                <div style="margin-top: 30px; text-align: center;">
+                    <button class="btn-action" style="display: inline-flex; margin: 0 auto;"
+                        onclick="generateFormalReport()"><i class="fa fa-file-text"></i>
+                        GENERATE & EXPORT CONSOLIDATED MARKSHEET</button>
+                    <div id="results-status" style="display:none; margin-top: 15px; color: #2e7d32; font-weight: bold;">
+                        <i class="fa fa-check-circle"></i> Official Marksheet Generated and Exported Successfully!
+                    </div>
+                </div>
+
+                <div
+                    style="display: flex; justify-content: flex-end; gap: 20px; margin-top: 30px; font-size: 14px; padding-top: 10px; border-top: 1px solid #eee;">
+                    <a href="javascript:void(0)" onclick="window.print()"
+                        style="color: blue; text-decoration: underline;">Print result</a>
+                    <a href="javascript:void(0)" onclick="openTab(event, 'assessment-tab')"
+                        style="color: blue; text-decoration: underline;">Back</a>
+                </div>
+            </div>
+
+            <div id="elective-tab" class="tab-content">
+                <h3 style="color: var(--secondary);"><i class="fa fa-list"></i> ELECTIVE COURSE SELECTION</h3>
+                <p>Please select your preferred elective subject for the current semester (Year III).</p>
+                <div style="margin-top: 20px; display: flex; flex-direction: column; gap: 15px;">
+                    <label
+                        style="display: flex; align-items: center; gap: 15px; padding: 15px; border: 1px solid #eee; border-radius: 10px; cursor: pointer;">
+                        <input type="radio" name="elective" value="SK" checked>
+                        <div>
+                            <strong style="display: block;">Soft Skills & Communication (SK6001)</strong>
+                            <span style="font-size: 0.8rem; color: #666;">Focuses on corporate communication and
+                                personality development.</span>
+                        </div>
+                    </label>
+                    <label
+                        style="display: flex; align-items: center; gap: 15px; padding: 15px; border: 1px solid #eee; border-radius: 10px; cursor: pointer;">
+                        <input type="radio" name="elective" value="AI">
+                        <div>
+                            <strong style="display: block;">Intro to Artificial Intelligence (AI6002)</strong>
+                            <span style="font-size: 0.8rem; color: #666;">Introduction to machine learning and neural
+                                networks.</span>
+                        </div>
+                    </label>
+                </div>
+                <div style="margin-top: 20px;">
+                    <button class="btn-action" onclick="alert('Elective Selection Saved Successfully!')">SUBMIT
+                        SELECTION</button>
+                </div>
+            </div>
+
+            <div id="grievance-tab" class="tab-content">
+                <h3 style="color: var(--secondary);"><i class="fa fa-comments"></i> REGISTER ASSESSMENT GRIEVANCE</h3>
+                <p>If you find any discrepancy in your internal/external marks or profile, please lodge a formal
+                    request.</p>
+                <form
+                    onsubmit="event.preventDefault(); alert('Your grievance has been registered with Ref ID: SNBT-GR-7741. We will revert within 48 hours.')">
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 20px;">
+                        <div style="display: flex; flex-direction: column; gap: 8px;">
+                            <label><strong>Grievance Category</strong></label>
+                            <select style="padding: 10px; border-radius: 5px; border: 1px solid #ddd;">
+                                <option>Internal Marks Correction</option>
+                                <option>External Marks Discrepancy</option>
+                                <option>Profile Details Correction</option>
+                                <option>Attendance Correction</option>
+                            </select>
+                        </div>
+                        <div style="display: flex; flex-direction: column; gap: 8px;">
+                            <label><strong>Subject Code (If applicable)</strong></label>
+                            <input type="text" placeholder="e.g. CS6303"
+                                style="padding: 10px; border-radius: 5px; border: 1px solid #ddd;">
+                        </div>
+                    </div>
+                    <div style="display: flex; flex-direction: column; gap: 8px; margin-top: 20px;">
+                        <label><strong>Describe the Issue</strong></label>
+                        <textarea rows="4"
+                            style="padding: 10px; border-radius: 5px; border: 1px solid #ddd; width: 100%; box-sizing: border-box;"
+                            placeholder="Provide details about the incorrect data..."></textarea>
+                    </div>
+                    <div style="margin-top: 20px; display: flex; justify-content: flex-end;">
+                        <button type="submit" class="btn-action">LODGE GRIEVANCE</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <footer id="footer-placeholder"></footer>
+    <script>
+        const API_URL = "http://www.snbt.ac.in/api";
+        const defaultSubjects = [
+            { code: "CS6303", name: "Data Structures", group: "CS / Year III" },
+            { code: "CS6551", name: "Operating Systems", group: "CS / Year III" },
+            { code: "EC6001", name: "Microprocessors", group: "EC / Year III" },
+            { code: "EC6601", name: "VLSI Design", group: "EC / Year III" },
+            { code: "EC6602", name: "Antenna Theory", group: "EC / Year III" }
+        ];
+
+        let currentHT = "";
+        let currentStudent = null;
+
+        // Tab Logic
+        function openTab(evt, tabName) {
+            var i, tabContent, tabLinks;
+            tabContent = document.getElementsByClassName("tab-content");
+            for (i = 0; i < tabContent.length; i++) {
+                tabContent[i].classList.remove("active");
+            }
+            tabLinks = document.getElementsByClassName("tab");
+            for (i = 0; i < tabLinks.length; i++) {
+                tabLinks[i].classList.remove("active");
+            }
+            document.getElementById(tabName).classList.add("active");
+            evt.currentTarget.classList.add("active");
+        }
+
+        async function searchStudent() {
+            const htField = document.getElementById('hallticket-search');
+            const captchaField = document.getElementById('captcha-input');
+
+            const ht = htField.value.toUpperCase().trim();
+            const captcha = captchaField.value.toLowerCase();
+
+            if (!ht) {
+                alert("Please enter a Hall Ticket Number");
+                return;
+            }
+
+            if (!captchaMgr.validate(captcha)) {
+                alert("Invalid Captcha! Please try again.");
+                refreshCaptcha();
+                return;
+            }
+
+            try {
+                const response = await fetch(`${API_URL}/students/${ht}`);
+                const data = await response.json();
+
+                if (data.success) {
+                    currentHT = ht;
+                    currentStudent = data.student;
+                    
+                    document.getElementById('no-record-msg').classList.add('hidden');
+                    document.getElementById('student-dashboard').classList.remove('hidden');
+
+                    // Populate Dashboard Info
+                    document.getElementById('disp-name').innerText = currentStudent.name;
+                    document.getElementById('disp-ht').innerText = ht;
+                    document.getElementById('disp-course').innerText = currentStudent.course + " (" + (currentStudent.year || "N/A") + ")";
+
+                    // Populate Profile Tab
+                    document.getElementById('prof-name-full').innerText = currentStudent.name;
+                    document.getElementById('prof-father').innerText = currentStudent.father;
+
+                    // Populate Preview Tab
+                    document.getElementById('prev-ht').innerText = ht;
+                    document.getElementById('prev-name').innerText = currentStudent.name;
+                    document.getElementById('prev-course').innerText = currentStudent.course;
+
+                    loadMarks(currentStudent);
+                    
+                    document.getElementById('report-output').innerHTML = `
+                        <div style="text-align: center; padding: 40px; background: #f8f9fa; border-radius: 10px; border: 2px dashed #ccc;">
+                            <i class="fa fa-file-text-o fa-3x" style="color: #bbb; margin-bottom: 15px;"></i>
+                            <p style="color: #888;">Search for a student and click <strong>GENERATE MARKSHEET</strong> below to view the official result record.</p>
+                        </div>`;
+                } else {
+                    alert("Student Record Not Found! Try Y243073009, Y233073024, Y233073025, Y233073026, or Y233073027");
+                }
+            } catch (err) {
+                console.error("Backend Error:", err);
+                alert("Backend server error. Please ensure Node.js server is running on port 5000.");
+            }
+        }
+
+        let captchaMgr;
+        document.addEventListener('DOMContentLoaded', () => {
+            captchaMgr = new CaptchaSystem('captcha-canvas', 'captcha-input');
+            refreshCaptcha();
+            
+            document.getElementById('captcha-canvas').addEventListener('click', () => {
+                refreshCaptcha();
+            });
+        });
+
+        function refreshCaptcha() {
+            if (captchaMgr) {
+                captchaMgr.refresh();
+                document.getElementById('captcha-text').innerText = captchaMgr.currentCaptcha;
+            }
+        }
+
+        function generateFormalReport() {
+            if (!currentStudent) return;
+
+            const marks = currentStudent.results || [];
+            let marksHtml = "";
+            marks.forEach(m => {
+                marksHtml += `<tr><td>${m.code}</td><td>${m.marks}</td></tr>`;
+            });
+
+            if (marks.length === 0) {
+                const assessmentMarks = currentStudent.assessment || [];
+                assessmentMarks.forEach(m => {
+                    const total = parseInt(m.intVal || 0) + parseInt(m.extVal || 0);
+                    marksHtml += `<tr><td>${m.code}</td><td>${total}P</td></tr>`;
+                });
+            }
+
+            const reportHtml = `
+                <div class="results-report-container" style="border: 1px solid #ccc; padding: 0; background: #fff; font-family: Arial, sans-serif;">
+                    <div class="report-header-bar"></div>
+                    <table class="report-info-table">
+                        <tr><td class="report-label">Hall Ticket Number :</td><td><strong>${currentHT}</strong></td></tr>
+                        <tr><td class="report-label">Student Name :</td><td>${currentStudent.name}</td></tr>
+                        <tr><td class="report-label">Father Name :</td><td>${currentStudent.father}</td></tr>
+                        <tr><td class="report-label">COURSE :</td><td>${currentStudent.course}</td></tr>
+                        <tr><td class="report-label">Object Code :</td><td>${currentStudent.objectCode || ''}</td></tr>
+                    </table>
+                    
+                    <div class="report-marks-wrapper">
+                        <table class="report-marks-table" style="width: 60%; margin: 0 auto;">
+                            <thead>
+                                <tr><th>Subject Code</th><th>Marks Obtained</th></tr>
+                            </thead>
+                            <tbody>
+                                ${marksHtml || '<tr><td colspan="2">No records found</td></tr>'}
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <table class="report-footer-table">
+                        <tr><td class="report-label">Remarks</td><td></td></tr>
+                        <tr><td class="report-label">Remark 1</td><td></td></tr>
+                        <tr><td class="report-label">RT Flag</td><td>0</td></tr>
+                    </table>
+                    <div class="report-footer-bar"></div>
+                </div>
+            `;
+
+            const btn = event.currentTarget;
+            btn.innerHTML = '<i class="fa fa-spinner fa-spin"></i> GENERATING OFFICIAL RECORD...';
+            btn.disabled = true;
+
+            setTimeout(() => {
+                document.getElementById('report-output').innerHTML = reportHtml;
+                document.getElementById('results-status').style.display = 'block';
+                btn.innerHTML = '<i class="fa fa-file-pdf-o"></i> RE-GENERATE & EXPORT MARKSHEET';
+                btn.disabled = false;
+
+                const link = document.createElement('a');
+                link.href = "../Downloads/snbt admission application.pdf";
+                link.download = `${currentHT}_Consolidated_Marksheet.pdf`;
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+
+                setTimeout(() => { document.getElementById('results-status').style.display = 'none'; }, 5000);
+            }, 1000);
+        }
+
+        function loadMarks(student) {
+            let marks = student.assessment || [];
+            if (marks.length === 0) {
+                marks = defaultSubjects.map(s => ({
+                    ...s,
+                    intMax: 30,
+                    intVal: 0,
+                    extMax: 50,
+                    extVal: 0
+                }));
+            }
+            renderMarksTable(marks);
+        }
+
+        function renderMarksTable(marks) {
+            const tbody = document.getElementById('marks-body');
+            tbody.innerHTML = '';
+
+            marks.forEach((m, index) => {
+                const total = parseInt(m.intVal || 0) + parseInt(m.extVal || 0);
+                const max = parseInt(m.intMax || 30) + parseInt(m.extMax || 50);
+                const pass = total >= (max * 0.4);
+
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td class="subject-code">${m.code}</td>
+                    <td>${m.name}</td>
+                    <td>${m.group}</td>
+                    <td>
+                        <select class="marks-input-select" onchange="updateRow(${index}, 'intMax', this.value)">
+                            <option value="30" ${m.intMax == 30 ? 'selected' : ''}>30</option>
+                            <option value="25" ${m.intMax == 25 ? 'selected' : ''}>25</option>
+                        </select>
+                    </td>
+                    <td><input type="number" value="${m.intVal}" onchange="updateRow(${index}, 'intVal', this.value)" class="marks-input"></td>
+                    <td>50</td>
+                    <td><input type="number" value="${m.extVal}" onchange="updateRow(${index}, 'extVal', this.value)" class="marks-input"></td>
+                    <td style="font-weight: bold;">${total} / ${max}</td>
+                    <td><span class="status-badge ${pass ? 'status-pass' : 'status-fail'}">${pass ? 'PASS' : 'FAIL'}</span></td>
+                `;
+                tbody.appendChild(row);
+            });
+        }
+
+        function updateRow(index, field, value) {
+            if (!currentStudent.assessment) {
+                currentStudent.assessment = defaultSubjects.map(s => ({ ...s, intMax: 30, intVal: 0, extMax: 50, extVal: 0 }));
+            }
+            currentStudent.assessment[index][field] = value;
+            renderMarksTable(currentStudent.assessment);
+        }
+
+        async function saveMarks() {
+            if (!currentHT || !currentStudent.assessment) return;
+
+            try {
+                const response = await fetch(`${API_URL}/students/${currentHT}/marks`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ marks: currentStudent.assessment })
+                });
+                const data = await response.json();
+                if (data.success) {
+                    alert(`SUCCESS: Assessment records for ${currentHT} updated and replaced in server database!`);
+                } else {
+                    alert("Failed to save changes: " + data.message);
+                }
+            } catch (err) {
+                console.error("Save error:", err);
+                alert("Server error while saving. Please ensure backend is running.");
+            }
+        }
+
+        function resetMarks() {
+            if (confirm("Are you sure you want to reset all marks to zero?")) {
+                currentStudent.assessment = null;
+                loadMarks(currentStudent);
+            }
+        }
+
+        document.getElementById('hallticket-search').addEventListener('keypress', function (e) {
+            if (e.key === 'Enter') { searchStudent(); }
+        });
+    </script>
+    <script src="../assets/JS/main.js"></script>
+</body>
+
+</html>

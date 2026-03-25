@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SNBT | Daily Attendance</title>
+    <link rel="icon" type="image/x-icon" href="../IMAGES/favicon.ico">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="../assets/CSS/Nav.css">
+    <link rel="stylesheet" href="../assets/CSS/Footer.css">
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f0f2f5; margin: 0; padding: 0; }
+        .dashboard-container { max-width: 1000px; margin: 40px auto; background: white; border-radius: 20px; box-shadow: 0 20px 50px rgba(0, 0, 0, 0.1); overflow: hidden; }
+        .header { background: #131d3b; color: white; padding: 30px; text-align: center; }
+        .header h1 { margin: 0; font-size: 28px; }
+        .content { padding: 40px; }
+        
+        .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 20px;}
+        .form-group { margin-bottom: 15px; }
+        .form-group label { display: block; margin-bottom: 8px; font-weight: 600; color: #333; }
+        .form-group input, .form-group select { width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 8px; box-sizing: border-box; font-size: 15px;}
+        .btn { background: #ff4f01; color: white; padding: 15px 24px; border: none; border-radius: 8px; cursor: pointer; font-weight: bold; width: 100%; transition: 0.3s; font-size: 16px;}
+        .btn:hover { background: #e64600; box-shadow: 0 5px 15px rgba(255, 79, 1, 0.3); transform: translateY(-2px);}
+        
+        .data-table { width: 100%; border-collapse: collapse; margin-top: 30px; border-radius: 10px; overflow: hidden; box-shadow: 0 5px 15px rgba(0,0,0,0.05);}
+        .data-table th, .data-table td { padding: 15px; text-align: left; border-bottom: 1px solid #eee; }
+        .data-table th { background: #131d3b; color: white; font-weight: 600;}
+        .data-table tr:hover { background-color: #f9f9f9; }
+        .back-link { display: inline-block; margin-top: 30px; color: #131d3b; text-decoration: none; font-weight: bold; background: #eee; padding: 10px 20px; border-radius: 8px; transition: 0.3s;}
+        .back-link:hover { background: #131d3b; color: white; }
+    </style>
+</head>
+<body>
+    <div class="dashboard-container">
+        <div class="header">
+            <i class="fa fa-calendar-check-o" style="font-size: 40px; margin-bottom: 15px; color: #ff4f01;"></i>
+            <h1>Daily Attendance Tracker</h1>
+        </div>
+        <div class="content">
+            <h3 style="color: #131d3b; margin-top: 0;">Submit Class Attendance</h3>
+            <form id="attendanceForm">
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label>Attendance Date</label>
+                        <input type="date" id="aDate" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Course Name</label>
+                        <select id="aCourse" required>
+                            <option value="">-- Choose Course --</option>
+                            <option value="B.Sc Computers">B.Sc Computers</option>
+                            <option value="B.Com Computers">B.Com Computers</option>
+                            <option value="B.A History">B.A History</option>
+                            <option value="B.Sc Chemistry">B.Sc Chemistry</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Academic Year</label>
+                        <select id="aYear" required>
+                            <option value="">-- Choose Year --</option>
+                            <option value="1st Year">1st Year</option>
+                            <option value="2nd Year">2nd Year</option>
+                            <option value="3rd Year">3rd Year</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Status</label>
+                        <select id="aStatus" required>
+                            <option value="">-- Choose Status --</option>
+                            <option value="Submitted">Submitted All Present</option>
+                            <option value="Updates Pending">Updates Pending</option>
+                        </select>
+                    </div>
+                </div>
+                <button type="submit" class="btn"><i class="fa fa-upload"></i> Post Class Attendance</button>
+            </form>
+
+            <h3 style="margin-top: 50px; color: #131d3b; border-bottom: 2px solid #ff4f01; padding-bottom: 10px; display: inline-block;">Attendance Logs</h3>
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th>Course</th>
+                        <th>Year</th>
+                        <th>Status</th>
+                        <th style="text-align:center;">Action</th>
+                    </tr>
+                </thead>
+                <tbody id="dataTableBody">
+                    <!-- Data injected via JS -->
+                </tbody>
+            </table>
+            
+            <a href="../Staff-login/index.html" class="back-link"><i class="fa fa-arrow-left"></i> Return to Staff Portal</a>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('aDate').valueAsDate = new Date();
+        const formObj = document.getElementById('attendanceForm');
+        const listObj = document.getElementById('dataTableBody');
+        const storageKey = 'snbt_staff_attendance';
+
+        function loadData() {
+            const dataStr = localStorage.getItem(storageKey);
+            return dataStr ? JSON.parse(dataStr) : [];
+        }
+
+        function saveData(data) {
+            localStorage.setItem(storageKey, JSON.stringify(data));
+        }
+
+        function renderRows() {
+            const data = loadData();
+            listObj.innerHTML = '';
+            
+            if(data.length === 0) {
+                listObj.innerHTML = '<tr><td colspan="5" style="text-align:center; padding: 30px; color:#888;">No attendance logged yet.</td></tr>';
+                return;
+            }
+
+            data.forEach((item, index) => {
+                const statusColor = item.status === 'Submitted' ? '#28a745' : '#ffc107';
+                const statusBg = item.status === 'Submitted' ? '#e6f4ea' : '#fff8e1';
+                
+                const tr = document.createElement('tr');
+                tr.innerHTML = `
+                    <td><strong>${item.date}</strong></td>
+                    <td>${item.course}</td>
+                    <td>${item.year}</td>
+                    <td><span style="background:${statusBg}; color:${statusColor}; padding:4px 8px; border-radius:4px; font-size:13px; font-weight:bold;">${item.status}</span></td>
+                    <td style="text-align:center;">
+                        <button onclick="deleteRecord(${index})" style="background:#dc3545; color:white; border:none; padding:8px 12px; border-radius:5px; cursor:pointer;" title="Delete">
+                            <i class="fa fa-trash"></i>
+                        </button>
+                    </td>
+                `;
+                listObj.appendChild(tr);
+            });
+        }
+
+        function deleteRecord(index) {
+            if(confirm('Are you sure you want to remove this log?')) {
+                const data = loadData();
+                data.splice(index, 1);
+                saveData(data);
+                renderRows();
+            }
+        }
+
+        formObj.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const newItem = {
+                date: document.getElementById('aDate').value,
+                course: document.getElementById('aCourse').value,
+                year: document.getElementById('aYear').value,
+                status: document.getElementById('aStatus').value
+            };
+
+            const data = loadData();
+            data.unshift(newItem); // Add to beginning
+            saveData(data);
+            renderRows();
+            
+            // Keep date but reset other fields
+            const dateVal = document.getElementById('aDate').value;
+            formObj.reset();
+            document.getElementById('aDate').value = dateVal;
+        });
+
+        renderRows();
+    </script>
+</body>
+</html>

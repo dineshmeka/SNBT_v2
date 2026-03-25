@@ -1,0 +1,26 @@
+{
+  "name": "snbt-degree-collage",
+  "version": "1.0.0",
+  "description": "I made a clone of my college website as a project work using HTML,CSS,JavaScript,Jquerry.",
+  "main": "index.js",
+  "scripts": {
+    "start": "node server.js",
+    "build:mobile": "node build.js && npx cap sync",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "@capacitor/android": "^8.2.0",
+    "@capacitor/core": "^8.2.0",
+    "@capacitor/ios": "^8.2.0",
+    "body-parser": "^2.2.2",
+    "cors": "^2.8.6",
+    "express": "^5.2.1"
+  },
+  "devDependencies": {
+    "@capacitor/cli": "^8.2.0"
+  }
+}

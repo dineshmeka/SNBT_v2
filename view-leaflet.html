@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>College Prospectus | SNBT Degree College</title>
+    <link rel="icon" type="image/x-icon" href="assets/IMAGES/favicon.ico">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="assets/JS/jquerry.js"></script>
+    <link rel="stylesheet" href="assets/CSS/Nav.css">
+    <link rel="stylesheet" href="assets/CSS/Footer.css">
+    <style>
+        :root {
+            --primary: #ff4f01;
+            --dark: #131d3b;
+            --light: #f4f4f4;
+            --white: #ffffff;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--light);
+            overflow-x: hidden;
+        }
+
+        /* Hero Section for PDF page */
+        .pdf-hero {
+            background-color: var(--dark);
+            height: 200px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding-top: 100px; /* Space for sticky nav */
+            color: var(--white);
+            text-align: center;
+            position: relative;
+            background: linear-gradient(135deg, #131d3b 0%, #1a2a5a 100%);
+        }
+
+        .pdf-hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            letter-spacing: 1px;
+            animation: fadeInDown 0.8s ease;
+        }
+
+        .hero-breadcrumb {
+            font-size: 14px;
+            opacity: 0.8;
+            margin-bottom: 20px;
+        }
+
+        /* Container & Viewer */
+        .viewer-container {
+            max-width: 1400px;
+            margin: -50px auto 50px;
+            padding: 0 20px;
+            position: relative;
+            z-index: 10;
+        }
+
+        .viewer-glass {
+            background: var(--white);
+            border-radius: 15px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.15);
+            padding: 25px;
+            animation: fadeInUp 1s ease;
+        }
+
+        .controls-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .btn-action {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background-color: var(--primary);
+            color: var(--white);
+            padding: 12px 24px;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            margin: 5px;
+            box-shadow: 0 4px 10px rgba(255, 79, 1, 0.2);
+        }
+
+        .btn-action:hover {
+            transform: translateY(-3px);
+            background-color: #e64600;
+            box-shadow: 0 6px 15px rgba(255, 79, 1, 0.4);
+        }
+
+        .btn-secondary {
+            background-color: transparent;
+            color: var(--dark);
+            border: 2px solid var(--dark);
+            box-shadow: none;
+        }
+
+        .btn-secondary:hover {
+            background-color: var(--dark);
+            color: var(--white);
+            transform: translateY(-3px);
+        }
+
+        .pdf-frame {
+            width: 100%;
+            height: 90vh;
+            border: 2px solid #eee;
+            border-radius: 10px;
+            background-color: #525659; /* Standard PDF background */
+        }
+
+        /* Animations */
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Loading Spinner */
+        #loader {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 5;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: var(--primary);
+        }
+
+        .spinner {
+            width: 50px;
+            height: 50px;
+            border: 5px solid rgba(255, 79, 1, 0.1);
+            border-left-color: var(--primary);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        @media (max-width: 768px) {
+            .pdf-hero h1 { font-size: 1.8rem; }
+            .controls-bar { flex-direction: column; gap: 15px; text-align: center; }
+            .btn-action { width: 100%; justify-content: center; }
+            .pdf-frame { height: 70vh; }
+        }
+    </style>
+    <script>
+        $(function () {
+            // Load Navigation
+            $("#nav-placeholder").load("Nav.html", function() {
+                // Fix Logo path if needed
+                $("#nav-placeholder").find("img").attr("src", "assets/IMAGES/Snbt logo.png");
+            });
+            // Load Footer
+            $("#footer-placeholder").load("Footer.html");
+        });
+
+        function hideLoader() {
+            document.getElementById('loader').style.display = 'none';
+        }
+    </script>
+</head>
+<body>
+    <div id="nav-placeholder"></div>
+
+    <div class="pdf-hero">
+        <div class="hero-breadcrumb">SNBT / Downloads / Prospectus</div>
+        <h1>College Leaflet & Prospectus</h1>
+    </div>
+
+    <div class="viewer-container">
+        <div class="viewer-glass">
+            <div class="controls-bar">
+                <a href="index.html" class="btn-action btn-secondary"><i class="fa fa-arrow-left"></i> Home</a>
+                <div style="display:flex; gap:10px;">
+                    <a href="Downloads/SNBT-LEAFLET.pdf" download="SNBT-Prospectus.pdf" class="btn-action">
+                        <i class="fa fa-download"></i> Download Original (19.6MB)
+                    </a>
+                </div>
+            </div>
+
+            <div style="position: relative;">
+                <div id="loader">
+                    <div class="spinner"></div>
+                    <p style="margin-top:15px; font-weight:bold;">Loading Brochure, Please wait...</p>
+                </div>
+                
+                <iframe 
+                    src="Downloads/SNBT-LEAFLET.pdf" 
+                    title="College Prospectus" 
+                    class="pdf-frame" 
+                    onload="hideLoader()">
+                    Your browser does not support IFRAMEs. <a href="Downloads/SNBT-LEAFLET.pdf">Click here to download.</a>
+                </iframe>
+            </div>
+            
+            <div style="margin-top: 20px; text-align: center; font-size: 13px; color: #777;">
+                <i class="fa fa-info-circle"></i> Having trouble? Try refreshing the page or using a modern browser like Chrome, Edge, or Firefox.
+            </div>
+        </div>
+    </div>
+
+    <footer id="footer-placeholder"></footer>
+    <script src="assets/JS/main.js"></script>
+</body>
+</html>

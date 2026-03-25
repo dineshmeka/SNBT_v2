@@ -1,0 +1,91 @@
+<div id="footer-box">
+    <div class="col-det">
+        <div class="col-det-box">
+            <div class="footer-logo">
+                <img id="footer-logo" src="assets/IMAGES/SNBT_footer.png" alt="SNBT Logo" style="width:230px; height:auto;">
+            </div>
+            <p><i class="fa fa-map-marker" style="color:#ff4f01; margin-right: 10px;"></i>Repalle, Bapatla<br><span style="margin-left: 25px;">Andhra Pradesh, INDIA</span></p>
+            <p><i class="fa fa-phone" style="color:#ff4f01; margin-right: 10px;"></i><span style="color:#d8981f; font-weight: bold;">Phone No:</span> 8500066532</p>
+            <p><i class="fa fa-envelope" style="color:#ff4f01; margin-right: 10px;"></i><span style="color:#d8981f; font-weight: bold;">Email:</span> snbtdegreecollegeforwomen@gmail.com</p>
+        </div>
+    </div>
+
+    <div class="u-links">
+        <div class="ul-header">
+            <h3>Useful Links</h3>
+        </div>
+        <ul class="ul-lists" id="footer-ul-links">
+            <li><a href="http://www.snbt.ac.in" target="_blank" rel="noreferrer noopener"><i class="fa fa-globe"></i> SNBT Website</a></li>
+            <li><a href="Admissions/index.html"><i class="fa fa-graduation-cap"></i> Admission</a> </li>
+            <li><a href="Admin-staff/index.html"><i class="fa fa-users"></i> Admin Staff</a> </li>
+            <li><a href="view-leaflet.html" target="_blank" rel="noreferrer noopener"><i class="fa fa-file-pdf-o"></i> Download Prospectus</a></li>
+            <li><a href="#"><i class="fa fa-camera"></i> Media</a></li>
+        </ul>
+        <div class="social-wrapper">
+            <ul class="footer-media">
+                <li><a href="https://www.youtube.com/channel/UC61pGiE9cw8lRN5bM1E423Q" target="_blank" class="contact-icon" id="youtube"><i class="fa fa-youtube-play"></i></a></li>
+                <li><a href="https://www.facebook.com/snbt/" target="_blank" class="contact-icon" id="facebook"><i class="fa fa-facebook-official"></i></a></li>
+                <li><a href="#" target="_blank" class="contact-icon" id="twitter"><i class="fa fa-twitter"></i></a></li>
+                <li><a href="#" target="_blank" class="contact-icon" id="instagram"><i class="fa fa-instagram"></i></a></li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="map">
+        <div class="map-header">
+            <h3>Location</h3>
+        </div>
+        <div class="map-body">
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3834.8765879037533!2d80.81749730833978!3d16.019938640696296!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a49f58ff5f7d341%3A0x73ae31c45b107076!2sSNBT%20B.ED%20College!5e0!3m2!1sen!2sin!4v1772254570175!5m2!1sen!2sin"
+                width="100%" height="200" style="border:0; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.3);" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+            </iframe>
+        </div>
+    </div>
+    <script>
+        // Fix footer links for subfolders
+        (function () {
+            const isSubfolder = window.location.pathname.includes('/About/') ||
+                window.location.pathname.includes('/Gallery/') ||
+                window.location.pathname.includes('/Admissions/') ||
+                window.location.pathname.includes('/Admin-staff/') ||
+                window.location.pathname.includes('/Contact/') ||
+                window.location.pathname.includes('/Results/') ||
+                window.location.pathname.includes('/Student-services/') ||
+                window.location.pathname.includes('/Staff-login/') ||
+                window.location.pathname.includes('/Daily-attendance/') ||
+                window.location.pathname.includes('/Internal-mail/') ||
+                window.location.pathname.includes('/Publish-results/') ||
+                window.location.pathname.includes('/Student-database/');
+
+            if (isSubfolder) {
+                const ul = document.getElementById('footer-ul-links');
+                if (ul) {
+                    const links = ul.querySelectorAll('a');
+                    links.forEach(link => {
+                        const href = link.getAttribute('href');
+                        if (href && !href.startsWith('http') && !href.startsWith('#') && !href.startsWith('../')) {
+                            link.setAttribute('href', '../' + href);
+                        }
+                    });
+                }
+                // Fix footer logo too
+                const footerLogo = document.getElementById('footer-logo');
+                if (footerLogo) {
+                    const src = footerLogo.getAttribute('src');
+                    if (src && !src.startsWith('http') && !src.startsWith('../')) {
+                        footerLogo.setAttribute('src', '../' + src);
+                    }
+                }
+            }
+        })();
+    </script>
+</div>
+<div class="endcredits">
+    <div class="ec-left">
+        <P style="font-size: 14px;"><i>All rights reserved by</i> SNBT | &copy; 2026</P>
+    </div>
+    <div class="ec-right">
+        <p style="font-size: 13px;"><i> Developed By</i> <a style="font-weight: 600; color: #ff4f01; text-decoration: none;"
+                href="https://www.linkedin.com/in/shaik-muneeruddin-5177ba265/">S.P. NITHEESH</a></p>
+    </div>
+</div>

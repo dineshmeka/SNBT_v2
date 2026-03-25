@@ -1,0 +1,207 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600&family=Amaranth:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+
+/* footer section begins here */
+#footer-box {
+    display: flex;
+    background: linear-gradient(135deg, #131d3b 0%, #0a1128 100%);
+    flex-wrap: wrap;
+    justify-content: space-around;
+    gap: 30px;
+    padding: 60px 5%;
+    align-items: flex-start;
+    color: white;
+    position: relative;
+    overflow: hidden;
+    font-family: 'Outfit', sans-serif;
+}
+
+#footer-box::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, #ff4f01, transparent);
+    opacity: 0.5;
+}
+
+/* college details section begins here */
+.col-det {
+    flex: 1;
+    min-width: 300px;
+    padding: 10px;
+}
+
+.col-det-box {
+    animation: fadeIn 0.8s ease-out;
+}
+
+.footer-logo {
+    margin-bottom: 25px;
+    transition: transform 0.3s ease;
+}
+
+.footer-logo:hover {
+    transform: scale(1.02);
+}
+
+.col-det-box p {
+    padding: 8px 0;
+    font-size: 15px;
+    line-height: 1.6;
+    color: rgba(255, 255, 255, 0.8);
+    display: flex;
+    align-items: center;
+}
+
+.col-det-box i {
+    font-size: 18px;
+    width: 25px;
+    text-align: center;
+}
+
+/* college details section ends here */
+
+.u-links, .map {
+    flex: 1;
+    min-width: 280px;
+    padding: 10px;
+}
+
+.u-links h3, .map h3 {
+    color: white;
+    font-size: 24px;
+    margin-bottom: 30px;
+    position: relative;
+    font-weight: 600;
+}
+
+.u-links h3::after, .map h3::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 0;
+    width: 50px;
+    height: 3px;
+    background: #ff4f01;
+    border-radius: 2px;
+}
+
+.ul-lists {
+    padding: 0;
+    margin: 0;
+}
+
+.ul-lists li {
+    padding-bottom: 12px;
+    list-style: none;
+    transition: transform 0.3s ease;
+}
+
+.ul-lists li:hover {
+    transform: translateX(8px);
+}
+
+.ul-lists a {
+    color: rgba(255, 255, 255, 0.8);
+    text-decoration: none;
+    transition: 0.3s;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.ul-lists a i {
+    color: #ff4f01;
+    font-size: 14px;
+}
+
+.ul-lists a:hover {
+    color: #ff4f01;
+}
+
+.social-wrapper {
+    margin-top: 30px;
+}
+
+.footer-media {
+    padding: 0;
+    margin: 0;
+    display: flex;
+    gap: 15px;
+    list-style: none;
+}
+
+.footer-media li a {
+    font-size: 20px;
+    background: rgba(255, 255, 255, 0.05);
+    width: 45px;
+    height: 45px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 12px;
+    color: white;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.footer-media li a:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(255, 79, 1, 0.3);
+    border-color: #ff4f01;
+}
+
+#facebook:hover { background: #3b5998 !important; }
+#youtube:hover { background: #ff0000 !important; }
+#twitter:hover { background: #1da1f2 !important; }
+#instagram:hover { background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%) !important; }
+
+.map {
+    flex: 1.2;
+}
+
+.map-body {
+    position: relative;
+}
+
+@media (max-width: 768px) {
+    #footer-box {
+        text-align: center;
+        padding: 40px 20px;
+    }
+    
+    .u-links h3::after, .map h3::after {
+        left: 50%;
+        transform: translateX(-50%);
+    }
+    
+    .ul-lists a {
+        justify-content: center;
+    }
+    
+    .footer-media {
+        justify-content: center;
+    }
+    
+    .col-det-box p {
+        justify-content: center;
+    }
+}
+
+.endcredits {
+    display: flex;
+    flex-wrap: wrap;
+    background-color: #0d152b;
+    color: rgba(255, 255, 255, 0.6);
+    justify-content: space-between;
+    padding: 20px 8%;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}

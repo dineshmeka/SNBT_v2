@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Academic Info | SNBT</title>
+    <link rel="icon" type="image/x-icon" href="../assets/IMAGES/favicon.ico">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="../assets/JS/jquerry.js"></script>
+    <link rel="stylesheet" href="../assets/CSS/Nav.css">
+    <link rel="stylesheet" href="../assets/CSS/Footer.css">
+    <link rel="stylesheet" href="../assets/CSS/Results.css">
+    <link rel="stylesheet" href="../assets/CSS/Responsive.css">
+    <script>
+        $(function () {
+            $("#nav-placeholder").load("../Nav.html");
+            $("#footer-placeholder").load("../Footer.html");
+        });
+    </script>
+    <style>
+        .page-header {
+            text-align: center;
+            padding: 40px 20px;
+            background: #131d3b;
+            color: white;
+            margin-bottom: 30px;
+        }
+
+        .info-form {
+            max-width: 600px;
+            margin: 0 auto;
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            border-top: 5px solid #ff4f01;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #131d3b;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #eee;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+
+        .form-group input:focus {
+            border-color: #ff4f01;
+            outline: none;
+        }
+
+        .btn-fetch {
+            width: 100%;
+            padding: 15px;
+            background: #ff4f01;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .btn-fetch:hover {
+            background: #e64600;
+        }
+
+        #info-result {
+            margin-top: 30px;
+            display: none;
+        }
+
+        .profile-card {
+            background: #f8f9fa;
+            border-radius: 15px;
+            border: 1px solid #ddd;
+            overflow: hidden;
+            animation: fadeIn 0.5s ease;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .profile-header {
+            background: #ff4f01;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .profile-body {
+            padding: 20px;
+        }
+
+        .info-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 12px 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .info-row:last-child {
+            border-bottom: none;
+        }
+
+        .info-label {
+            font-weight: 700;
+            color: #131d3b;
+            flex: 1;
+        }
+
+        .info-value {
+            flex: 1;
+            text-align: right;
+            color: #555;
+        }
+
+        /* Hide the inherited result prompt from Results.css */
+        .container::after {
+            display: none !important;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="nav-placeholder"></div>
+
+    <div class="page-header">
+        <h1><i class="fa fa-info-circle"></i> Academic Information</h1>
+        <p>Access your official student profile and academic details</p>
+    </div>
+
+    <div class="container" style="height: auto; margin-bottom: 100px;">
+        <div class="info-form">
+            <form id="academic-info-form">
+                <div class="form-group">
+                    <label>Hall Ticket Number</label>
+                    <input type="text" id="hallticket" placeholder="e.g. Y233073024" required>
+                </div>
+                <button type="submit" class="btn-fetch">VIEW PROFILE</button>
+            </form>
+
+            <div id="info-result">
+                <!-- Result will be populated here -->
+            </div>
+        </div>
+    </div>
+
+    <footer id="footer-placeholder"></footer>
+
+    <script>
+        document.getElementById('academic-info-form').addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            const hallticket = document.getElementById('hallticket').value.toUpperCase();
+            const resultDiv = document.getElementById('info-result');
+
+            resultDiv.style.display = 'block';
+            resultDiv.innerHTML = '<div style="text-align:center; padding: 20px;"><i class="fa fa-spinner fa-spin fa-2x"></i><p>Accessing University Records...</p></div>';
+
+            setTimeout(() => {
+                // Mock student data
+                const mockData = {
+                    "Y233073024": {
+                        name: "SAJJA PURNA CHANDRA NITHEESH",
+                        father: "S.V. RAM PRASAD",
+                        course: "B.SC Computer Science",
+                        semester: "IV Semester",
+                        adm_year: "2023",
+                        category: "Regular",
+                        status: "Active"
+                    },
+                    "Y233073025": {
+                        name: "YALAVARTHI KRISHNA CHAITANYA",
+                        father: "YALAVARTHI SURIBABU",
+                        course: "B.C.A",
+                        semester: "IV Semester",
+                        adm_year: "2023",
+                        category: "Regular",
+                        status: "Active"
+                    },
+                    "Y233073026": {
+                        name: "SHAIK HEERA",
+                        father: "SHAIK VALI",
+                        course: "B.C.A",
+                        semester: "IV Semester",
+                        adm_year: "2023",
+                        category: "Regular",
+                        status: "Active"
+                    },
+                    "Y233073027": {
+                        name: "SINGAMANENI ANUSHA",
+                        father: "SINGAMANENI BABURAO",
+                        course: "B.C.A",
+                        semester: "IV Semester",
+                        adm_year: "2023",
+                        category: "Regular",
+                        status: "Active"
+                    }
+                };
+
+                const student = mockData[hallticket] || {
+                    name: "STUDENT NAME NOT FOUND",
+                    father: "---",
+                    course: "---",
+                    semester: "---",
+                    adm_year: "---",
+                    category: "---",
+                    status: "Invalid Hallticket"
+                };
+
+                resultDiv.innerHTML = `
+                    <div class="profile-card">
+                        <div class="profile-header">
+                            <i class="fa fa-user-circle fa-4x"></i>
+                            <h2 style="margin-top:10px">${student.name}</h2>
+                        </div>
+                        <div class="profile-body">
+                            <div class="info-row">
+                                <span class="info-label">Hall Ticket No:</span>
+                                <span class="info-value">${hallticket}</span>
+                            </div>
+                            <div class="info-row">
+                                <span class="info-label">Father's Name:</span>
+                                <span class="info-value">${student.father}</span>
+                            </div>
+                            <div class="info-row">
+                                <span class="info-label">Course:</span>
+                                <span class="info-value">${student.course}</span>
+                            </div>
+                            <div class="info-row">
+                                <span class="info-label">Current Sem:</span>
+                                <span class="info-value">${student.semester}</span>
+                            </div>
+                            <div class="info-row">
+                                <span class="info-label">Admission Year:</span>
+                                <span class="info-value">${student.adm_year}</span>
+                            </div>
+                            <div class="info-row">
+                                <span class="info-label">Category:</span>
+                                <span class="info-value">${student.category}</span>
+                            </div>
+                            <div class="info-row">
+                                <span class="info-label">Status:</span>
+                                <span class="info-value" style="color: ${student.status === 'Active' ? 'green' : 'red'}; font-weight: bold;">${student.status}</span>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }, 1000);
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Attendance Percentage | SNBT</title>
+    <link rel="icon" type="image/x-icon" href="../assets/IMAGES/favicon.ico">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="../assets/JS/jquerry.js"></script>
+    <link rel="stylesheet" href="../assets/CSS/Nav.css">
+    <link rel="stylesheet" href="../assets/CSS/Footer.css">
+    <link rel="stylesheet" href="../assets/CSS/Results.css">
+    <link rel="stylesheet" href="../assets/CSS/Responsive.css">
+    <script>
+        $(function () {
+            $("#nav-placeholder").load("../Nav.html");
+            $("#footer-placeholder").load("../Footer.html");
+        });
+    </script>
+    <style>
+        .page-header {
+            text-align: center;
+            padding: 40px 20px;
+            background: #131d3b;
+            color: white;
+            margin-bottom: 30px;
+        }
+
+        .attendance-form {
+            max-width: 600px;
+            margin: 0 auto;
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            border-top: 5px solid #ff4f01;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #131d3b;
+        }
+
+        .form-group select,
+        .form-group input {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #eee;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+
+        .form-group select:focus,
+        .form-group input:focus {
+            border-color: #ff4f01;
+            outline: none;
+        }
+
+        .btn-check {
+            width: 100%;
+            padding: 15px;
+            background: #ff4f01;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .btn-check:hover {
+            background: #e64600;
+        }
+
+        #attendance-result {
+            margin-top: 30px;
+            display: none;
+        }
+
+        .percentage-card {
+            text-align: center;
+            padding: 30px;
+            background: #f8f9fa;
+            border-radius: 15px;
+            border: 1px solid #ddd;
+        }
+
+        .percentage-value {
+            font-size: 48px;
+            font-weight: 800;
+            color: #ff4f01;
+            margin: 15px 0;
+        }
+
+        .status-badge {
+            display: inline-block;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-weight: bold;
+            text-transform: uppercase;
+            font-size: 14px;
+        }
+
+        .status-good {
+            background: #d4edda;
+            color: #155724;
+        }
+
+        .status-warning {
+            background: #fff3cd;
+            color: #856404;
+        }
+
+        .status-danger {
+            background: #f8d7da;
+            color: #721c24;
+        }
+
+        /* Hide the inherited result prompt from Results.css */
+        .container::after {
+            display: none !important;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="nav-placeholder"></div>
+
+    <div class="page-header">
+        <h1><i class="fa fa-calendar-check-o"></i> Attendance Portal</h1>
+        <p>Check your monthly attendance percentage here</p>
+    </div>
+
+    <div class="container" style="height: auto; margin-bottom: 100px;">
+        <div class="attendance-form">
+            <form id="attendance-check-form">
+                <div class="form-group">
+                    <label>Course / Branch</label>
+                    <select id="branch" required>
+                        <option value="">Select Branch</option>
+                        <option value="BSC">BSC CS</option>
+                        <option value="BCOM">BCOM CS</option>
+                        <option value="BA">ARTS</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Year</label>
+                    <select id="year" required>
+                        <option value="">Select Year</option>
+                        <option value="1">I Year</option>
+                        <option value="2">II Year</option>
+                        <option value="3">III Year</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Enter Hall Ticket Number</label>
+                    <input type="text" id="hallticket" placeholder="e.g. Y233073024" required>
+                </div>
+                <button type="submit" class="btn-check">VIEW ATTENDANCE</button>
+            </form>
+
+            <div id="attendance-result">
+                <!-- Result will be populated here -->
+            </div>
+        </div>
+    </div>
+
+    <footer id="footer-placeholder"></footer>
+
+    <script>
+        document.getElementById('attendance-check-form').addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            const hallticket = document.getElementById('hallticket').value.toUpperCase();
+            const resultDiv = document.getElementById('attendance-result');
+
+            // For demonstration/simulation if data is not in JSON yet
+            // In a real scenario, this would fetch from assets/JS/data.json
+
+            resultDiv.style.display = 'block';
+            resultDiv.innerHTML = '<div style="text-align:center"><i class="fa fa-spinner fa-spin fa-2x"></i><p>Fetching attendance records...</p></div>';
+
+            setTimeout(() => {
+                // Mock logic: generate a consistent percentage based on hallticket length or last digit
+                const lastDigit = parseInt(hallticket.slice(-1)) || 5;
+                const percentage = 70 + (lastDigit * 2);
+                let statusClass = 'status-good';
+                let statusText = 'Excellent';
+
+                if (percentage < 75) {
+                    statusClass = 'status-danger';
+                    statusText = 'Shortage of Attendance';
+                } else if (percentage < 85) {
+                    statusClass = 'status-warning';
+                    statusText = 'Average';
+                }
+
+                resultDiv.innerHTML = `
+                    <div class="percentage-card">
+                        <h3>Attendance Summary</h3>
+                        <p>Student ID: <strong>${hallticket}</strong></p>
+                        <div class="percentage-value">${percentage}%</div>
+                        <div class="status-badge ${statusClass}">${statusText}</div>
+                        <hr style="margin: 20px 0; border: 0; border-top: 1px solid #eee;">
+                        <p style="font-size: 14px; color: #666;">Note: Minimum 75% attendance is required to appear for University Examinations.</p>
+                    </div>
+                `;
+            }, 800);
+        });
+    </script>
+</body>
+
+</html>

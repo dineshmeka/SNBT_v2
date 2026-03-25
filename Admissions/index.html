@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admissions | SNBT Degree College for Women</title>
+    <link rel="icon" type="image/x-icon" href="/assets/IMAGES/favicon.ico">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="/assets/JS/jquerry.js"></script>
+    <link rel="stylesheet" href="/assets/CSS/Nav.css">
+    <link rel="stylesheet" href="/assets/CSS/Footer.css">
+    <link rel="stylesheet" href="/assets/CSS/Responsive.css">
+    <style>
+        .admission-container {
+            max-width: 1000px;
+            margin: 80px auto;
+            padding: 20px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 5px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .header-section {
+            text-align: center;
+            margin-bottom: 40px;
+            border-bottom: 3px solid #ff4f01;
+            padding-bottom: 15px;
+        }
+
+        .header-section h1 {
+            color: #131d3b;
+            font-size: 2.5rem;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
+        }
+
+        .info-card {
+            padding: 25px;
+            border-radius: 10px;
+            background: #f9f9f9;
+            border-left: 5px solid #ff4f01;
+            transition: transform 0.3s ease;
+        }
+
+        .info-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .info-card h3 {
+            color: #131d3b;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .course-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .course-list li {
+            padding: 8px 0;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .course-list li:last-child {
+            border-bottom: none;
+        }
+
+        .apply-btn {
+            display: block;
+            width: fit-content;
+            margin: 40px auto;
+            background: #ff4f01;
+            color: white;
+            padding: 15px 40px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.1rem;
+            transition: background 0.3s;
+        }
+
+        .apply-btn:hover {
+            background: #131d3b;
+        }
+    </style>
+    <script>
+        $(function () {
+            $("#footer-placeholder").load("../Footer.html");
+        });
+    </script>
+</head>
+
+<body>
+    <div id="nav-placeholder"></div>
+
+    <div class="admission-container">
+        <div class="header-section">
+            <h1>Admissions 2026-27</h1>
+            <p>Empowering Women Through Excellence in Education</p>
+        </div>
+
+        <div class="info-grid">
+            <div class="info-card">
+                <h3><i class="fa fa-graduation-cap"></i> Courses Offered</h3>
+                <ul class="course-list">
+                    <li>B.Sc (Mathematics, Physics, Computer Science)</li>
+                    <li>B.Sc (Mathematics, Statistics, Computer Science)</li>
+                    <li>B.Com (Computer Applications)</li>
+                    <li>B.A (History, Economics, Political Science)</li>
+                </ul>
+            </div>
+
+            <div class="info-card">
+                <h3><i class="fa fa-check-square-o"></i> Eligibility Criteria</h3>
+                <p>Candidates must have passed Intermediate or 10+2 examination from a recognized board with relevant
+                    subjects as per choice of course.</p>
+                <p style="margin-top: 10px;"><b>Required Documents:</b></p>
+                <ul class="course-list">
+                    <li>SSC & Intermediate Marks Memo</li>
+                    <li>Transfer Certificate (TC)</li>
+                    <li>Study & Conduct Certificates</li>
+                    <li>Caste & Income Certificates (if applicable)</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="info-card" style="margin-top: 30px; border-left-color: #131d3b;">
+            <h3><i class="fa fa-file-pdf-o"></i> Student Joining Form (2026-27)</h3>
+            <p>Download the official admission application form for the 2026-27 academic year. Fill out the details and
+                submit the printed copy at the college office.</p>
+            <div style="display: flex; gap: 15px; margin-top: 20px;">
+                <a href="../Downloads/snbt admission application.pdf" download class="apply-btn"
+                    style="margin: 0; padding: 10px 25px; font-size: 0.9rem;">
+                    <i class="fa fa-download"></i> Download Application Form
+                </a>
+                <a href="../view-leaflet.html" class="apply-btn"
+                    style="margin: 0; padding: 10px 25px; font-size: 0.9rem; background: #131d3b;">
+                    <i class="fa fa-eye"></i> View Prospectus
+                </a>
+            </div>
+        </div>
+
+        <div class="info-card" style="margin-top: 30px;">
+            <h3><i class="fa fa-envelope-o"></i> Admission Enquiry</h3>
+            <form style="margin-top: 20px;">
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 15px;">
+                    <input type="text" placeholder="Full Name"
+                        style="padding: 10px; border: 1px solid #ddd; border-radius: 5px;">
+                    <input type="email" placeholder="Email Address"
+                        style="padding: 10px; border: 1px solid #ddd; border-radius: 5px;">
+                </div>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 15px;">
+                    <input type="tel" placeholder="Phone Number"
+                        style="padding: 10px; border: 1px solid #ddd; border-radius: 5px;">
+                    <select style="padding: 10px; border: 1px solid #ddd; border-radius: 5px;">
+                        <option>Select Course</option>
+                        <option>B.Sc (M.P.Cs)</option>
+                        <option>B.Sc (M.S.Cs)</option>
+                        <option>B.Com (CA)</option>
+                        <option>B.A (H.E.P)</option>
+                    </select>
+                </div>
+                <textarea placeholder="Your Message / Query" rows="4"
+                    style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 5px; margin-bottom: 15px; box-sizing: border-box;"></textarea>
+                <button type="submit" class="apply-btn" style="margin: 0; border: none; cursor: pointer;">Send
+                    Enquiry</button>
+            </form>
+        </div>
+
+        <a href="../Contact/index.html" class="apply-btn">Contact for Admission</a>
+    </div>
+
+    <footer id="footer-placeholder"></footer>
+
+    <script src="/assets/JS/main.js"></script>
+</body>
+
+</html>
