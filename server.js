@@ -5,7 +5,7 @@ const fs = require('fs');
 const path = require('path');
 
 const app = express();
-const PORT = 80;
+const PORT = process.env.PORT || 8080;
 const DATA_FILE = path.join(__dirname, 'data', 'students.json');
 
 app.use(cors());
@@ -15,6 +15,11 @@ app.use(bodyParser.json());
 const readData = () => {
     try {
         if (!fs.existsSync(DATA_FILE)) {
+            // Ensure data directory exists
+            const dir = path.dirname(DATA_FILE);
+            if (!fs.existsSync(dir)) {
+                fs.mkdirSync(dir, { recursive: true });
+            }
             // Create default structure if file missing
             const defaultData = { students: {} };
             fs.writeFileSync(DATA_FILE, JSON.stringify(defaultData, null, 2));
@@ -31,6 +36,10 @@ const readData = () => {
 // Helper to write data 
 const writeData = (data) => {
     try {
+        const dir = path.dirname(DATA_FILE);
+        if (!fs.existsSync(dir)) {
+            fs.mkdirSync(dir, { recursive: true });
+        }
         fs.writeFileSync(DATA_FILE, JSON.stringify(data, null, 2));
     } catch (err) {
         console.error("Error writing data file:", err);
@@ -38,7 +47,7 @@ const writeData = (data) => {
 };
 
 // Routes
-app.get('/', (req, res) => {
+app.get('/api/status', (req, res) => {
     res.json({ status: 'online', message: 'SNBT Backend Server is running', port: PORT });
 });
 
